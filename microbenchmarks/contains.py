@@ -4,15 +4,18 @@ import timeit
 setup = """data_list = ['left', 'right', 'up', 'down']
 data_tuple = ('left', 'right', 'up', 'down')
 data_set = {'left', 'right', 'up', 'down'}
+data_frozenset = frozenset(('left', 'right', 'up', 'down'))
 """
 
 tests = {
     "front_list": """'left' in data_list""",
     "front_tuple": """'left' in data_tuple""",
     "front_set": """'left' in data_set""",
+    "front_frozenset": """'left' in data_frozenset""",
     "back_list": """'down' in data_list""",
     "back_tuple": """'down' in data_tuple""",
     "back_set": """'down' in data_set""",
+    "back_frozenset": """'down' in data_frozenset""",
 }
 
 results = {}
