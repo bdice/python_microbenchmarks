@@ -25,8 +25,8 @@ tests = {
 results = {}
 for test_name, test_stmt in tests.items():
     times = timeit.repeat(
-        setup=dedent(setup).strip(),
-        stmt=dedent(test_stmt).strip(),
+        setup=dedent(setup).rstrip(),
+        stmt=dedent(test_stmt).rstrip(),
         repeat=1000,
         number=1000,
         globals={},
