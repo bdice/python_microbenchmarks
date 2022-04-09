@@ -2,11 +2,16 @@ import numpy as np
 import hashlib
 import timeit
 
-setup = """data = np.random.rand(1000) > 0.5"""
+setup = """\
+data_array = np.random.rand(1000)
+data_list = data_array.tolist()
+"""
 
 tests = {
-    "sum": """sum(data)""",
-    "np.sum": """np.sum(data)""",
+    "sum array": """sum(data_array)""",
+    "np.sum array": """np.sum(data_array)""",
+    "sum list": """sum(data_list)""",
+    "np.sum list": """np.sum(data_list)""",
 }
 
 results = {}
