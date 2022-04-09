@@ -2,13 +2,10 @@ import os
 import timeit
 
 setup = """data = ['/home/user/projects/signac_project', 'abcdef1234567890']
-def funcjoin(*paths):
-    return os.sep.join(paths)
 """
 
 tests = {
-    "join": """os.sep.join(data)""",
-    "funcjoin": """funcjoin(*data)""",
+    "os.sep.join": """os.sep.join(data)""",
     "concat": """data[0] + os.sep + data[1]""",
     "pathjoin": """os.path.join(*data)""",
     "fstring": """f'{data[0]}{os.sep}{data[1]}'""",
