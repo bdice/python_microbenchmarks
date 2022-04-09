@@ -2,7 +2,7 @@ import os
 import timeit
 from textwrap import dedent
 
-"""Counting an iterator by consuming it."""
+"""Splitting keys for nested dict access."""
 
 setup = """\
     data = {"a": {"b": {"c": 0}}}

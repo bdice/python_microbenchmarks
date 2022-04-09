@@ -2,7 +2,7 @@ import os
 import timeit
 from textwrap import dedent
 
-"""Counting an iterator by consuming it."""
+"""Constructing a list."""
 
 setup = """\
     data = tuple(range(1000))
