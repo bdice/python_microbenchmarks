@@ -6,19 +6,32 @@ from textwrap import dedent
 
 setup = """\
     data = {"a": {"b": {"c": 0}}}
-    keys = "a.b.c".split(".")
+    dotted_key = "a.b.c"
 """
 
 tests = {
     "one_direct_access": """\
+        keys = dotted_key.split(".")
         v = data[keys[0]]
         for n in keys[1:]:
             v = v[n]
     """,
     "recurse_all": """\
+        keys = dotted_key.split(".")
         v = data
         for n in keys:
             v = v[n]
+    """,
+    "dotted_get": """\
+        def dotted_get(mapping, key):
+            "Fetch a value from a nested mapping using a dotted key."
+            if mapping is None:
+                return None
+            tokens = key.split(".")
+            if len(tokens) > 1:
+                return dotted_get(mapping.get(tokens[0]), ".".join(tokens[1:]))
+            return mapping.get(key)
+        dotted_get(data, dotted_key)
     """,
 }
 
