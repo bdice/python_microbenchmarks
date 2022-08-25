@@ -33,6 +33,19 @@ tests = {
             return mapping.get(key)
         dotted_get(data, dotted_key)
     """,
+    "dotted_get2": """\
+        def dotted_get(mapping, key):
+            "Fetch a value from a nested mapping using a dotted key."
+            if mapping is None:
+                return None
+            tokens = key.split(".")
+            v = mapping
+            for token in tokens:
+                v = v.get(token)
+            return v
+        dotted_get(data, dotted_key)
+    """,
+
 }
 
 results = {}
