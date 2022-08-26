@@ -1,9 +1,9 @@
 import os
 import timeit
-from collections import OrderedDict
+from collections import OrderedDict, UserDict
 from textwrap import dedent
 
-"""LRU cache implemented with OrderedDict vs. dict."""
+"""LRU cache implemented with OrderedDict vs. dict. vs. UserDict"""
 
 setup = """\
 class LastUpdatedOrderedDict(OrderedDict):
@@ -22,10 +22,13 @@ class LastUpdatedDict:
         return self._cache[key]
 
     def __setitem__(self, key, value):
-        if key in self._cache:
-            self._cache[key] = self._cache.pop(key)
-        else:
-            self._cache[key] = value
+        self._cache[key] = self._cache.pop(key, value)
+
+class LastUpdatedUserDict(UserDict):
+    'Store items in the order the keys were last added'
+
+    def __setitem__(self, key, value):
+        super().__setitem__(key, self.pop(key, value))
 """
 
 tests = {
@@ -51,6 +54,17 @@ tests = {
         for i in range(100):
             d[i]
     """,
+    "UserDict": """\
+        d = LastUpdatedUserDict()
+        for i in range(100):
+            d[i] = i
+        for i in range(100):
+            d[i]
+        for i in range(100):
+            d[i] = i
+        for i in range(100):
+            d[i]
+    """,
 }
 
 results = {}
@@ -60,7 +74,7 @@ for test_name, test_stmt in tests.items():
         stmt=dedent(test_stmt).rstrip(),
         repeat=100,
         number=100,
-        globals={"OrderedDict": OrderedDict},
+        globals={"OrderedDict": OrderedDict, "UserDict": UserDict},
     )
     avg_time = sum(times) / len(times)
     results[test_name] = avg_time
