@@ -33,21 +33,18 @@ tests = {
             if (j, i) not in edges
         ]
     """,
-    "option3_sets": """\
-        # Use sets to avoid duplicates.
-        # The edges are unordered because (i, j) == (j, i).
-        edges = [
-            {i, j}
-            for face in faces
-            for i, j in zip(face[1:], np.roll(face, -1))
-        ]
-        edges = [list(edge) for edge in edges]
-    """,
-    "option4_no_alloc": """\
+    "option3": """\
+        # "Roll your own" definition of roll to avoid array copies in np.roll.
+        # This gives a significant performance boost.
+        def roll1(it):
+            yield from it[1:]
+            yield it[0]
+
         # This avoids allocating an unused result for the list comprehension
+        # which is a small but measurable difference.
         edges = []
         for face in faces:
-            for i, j in zip(face, np.roll(face, -1)):
+            for i, j in zip(face, roll1(face)):
                 if (j, i) not in edges:
                     edges.append((i, j))
     """,
@@ -58,8 +55,8 @@ for test_name, test_stmt in tests.items():
     times = timeit.repeat(
         setup=dedent(setup).rstrip(),
         stmt=dedent(test_stmt).rstrip(),
-        repeat=10,
-        number=100,
+        repeat=100,
+        number=10,
         globals={"np": np},
     )
     avg_time = sum(times) / len(times)
