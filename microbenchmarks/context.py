@@ -1,4 +1,4 @@
-# From https://stackoverflow.com/questions/26152934/why-the-staggering-overhead-50x-of-contextlib-and-the-with-statement-in-python
+# From https://stackoverflow.com/questions/26152934/why-the-staggering-overhead-50x-of-contextlib-and-the-with-statement-in-python  # noqa: E501
 import contextlib
 import timeit
 
@@ -52,7 +52,7 @@ def with_preinstantiated_manual_contextmanager(fn):
         fn()
 
 
-setup = "from __main__ import simple_catch, work_pass, work_fail, with_contextlib_contextmanager, with_manual_contextmanager, with_preinstantiated_manual_contextmanager"
+setup = "from __main__ import simple_catch, work_pass, work_fail, with_contextlib_contextmanager, with_manual_contextmanager, with_preinstantiated_manual_contextmanager"  # noqa: E501
 tests = [
     "simple_catch(work_pass)",
     "simple_catch(work_fail)",

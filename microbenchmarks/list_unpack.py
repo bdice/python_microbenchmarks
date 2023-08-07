@@ -1,4 +1,3 @@
-import os
 import timeit
 from textwrap import dedent
 

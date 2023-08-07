@@ -1,4 +1,3 @@
-import os
 import timeit
 
 """Counting an iterator by consuming it."""

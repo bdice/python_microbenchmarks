@@ -1,5 +1,4 @@
 # Based on snippet from https://bugs.python.org/issue3001
-from threading import Lock, RLock
 
 REPEATS = 1000000
 
@@ -17,28 +16,28 @@ def RLockSpeed():
     for i in range(REPEATS):
         do_nothing()
     result["empty loop"] = time.time() - t
-    l = threading.Lock()
+    lock = threading.Lock()
     t = time.time()
     for i in range(REPEATS):
-        l.acquire()
+        lock.acquire()
         do_nothing()
-        l.release()
+        lock.release()
     result["Lock"] = time.time() - t
     t = time.time()
     for i in range(REPEATS):
-        with l:
+        with lock:
             do_nothing()
     result["Lock_context"] = time.time() - t
-    l = threading.RLock()
+    lock = threading.RLock()
     t = time.time()
     for i in range(REPEATS):
-        l.acquire()
+        lock.acquire()
         do_nothing()
-        l.release()
+        lock.release()
     result["RLock"] = time.time() - t
     t = time.time()
     for i in range(REPEATS):
-        with l:
+        with lock:
             do_nothing()
     result["RLock_context"] = time.time() - t
     return result

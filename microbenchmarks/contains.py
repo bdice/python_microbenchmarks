@@ -1,4 +1,3 @@
-import os
 import timeit
 
 setup = """data_list = ['left', 'right', 'up', 'down']

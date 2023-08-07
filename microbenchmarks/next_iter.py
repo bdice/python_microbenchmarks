@@ -1,4 +1,3 @@
-import os
 import timeit
 
 """Getting the first item."""

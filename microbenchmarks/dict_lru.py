@@ -1,4 +1,3 @@
-import os
 import timeit
 from collections import OrderedDict, UserDict
 from textwrap import dedent
