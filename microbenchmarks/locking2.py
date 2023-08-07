@@ -3,11 +3,14 @@ from threading import Lock, RLock
 
 REPEATS = 1000000
 
+
 def do_nothing():
     pass
 
+
 def RLockSpeed():
-    import time, threading
+    import threading
+    import time
 
     t = time.time()
     result = {}

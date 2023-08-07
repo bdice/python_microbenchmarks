@@ -1,5 +1,6 @@
-import numpy as np
 import timeit
+
+import numpy as np
 
 setups = {
     "hit": """data = np.float64(0.1234)""",
@@ -21,7 +22,11 @@ for setup_name, setup_stmt in setups.items():
     for test_name, test_stmt in tests.items():
         test_name = f"{setup_name}, {test_name}"
         times = timeit.repeat(
-            setup=setup_stmt, stmt=test_stmt, repeat=10, number=100000, globals={"np": np}
+            setup=setup_stmt,
+            stmt=test_stmt,
+            repeat=10,
+            number=100000,
+            globals={"np": np},
         )
         avg_time = sum(times) / len(times)
         results[test_name] = avg_time

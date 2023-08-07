@@ -1,5 +1,5 @@
-from threading import Lock, RLock
 import timeit
+from threading import Lock, RLock
 
 setup = """l = Lock()
 r = RLock()
@@ -18,7 +18,11 @@ tests = {
 results = {}
 for test_name, test_stmt in tests.items():
     times = timeit.repeat(
-        setup=setup, stmt=test_stmt, repeat=10, number=1000000, globals={"Lock": Lock, "RLock": RLock}
+        setup=setup,
+        stmt=test_stmt,
+        repeat=10,
+        number=1000000,
+        globals={"Lock": Lock, "RLock": RLock},
     )
     avg_time = sum(times) / len(times)
     results[test_name] = avg_time

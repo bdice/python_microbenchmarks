@@ -45,7 +45,6 @@ tests = {
             return v
         dotted_get(data, dotted_key)
     """,
-
 }
 
 results = {}

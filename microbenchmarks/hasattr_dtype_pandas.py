@@ -1,5 +1,6 @@
-import pandas as pd
 import timeit
+
+import pandas as pd
 
 setups = {
     "hit": """data = pd.Series([0.1234])""",
@@ -21,7 +22,11 @@ for setup_name, setup_stmt in setups.items():
     for test_name, test_stmt in tests.items():
         test_name = f"{setup_name}, {test_name}"
         times = timeit.repeat(
-            setup=setup_stmt, stmt=test_stmt, repeat=10, number=100000, globals={"pd": pd}
+            setup=setup_stmt,
+            stmt=test_stmt,
+            repeat=10,
+            number=100000,
+            globals={"pd": pd},
         )
         avg_time = sum(times) / len(times)
         results[test_name] = avg_time

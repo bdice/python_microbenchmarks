@@ -12,7 +12,7 @@ for i, _ in enumerate(iterable, 1):
     "sum": """sum(1 for _ in iterable)""",
     "direct_count": """i = 0
 for _ in iterable:
-    i += 1"""
+    i += 1""",
 }
 
 results = {}

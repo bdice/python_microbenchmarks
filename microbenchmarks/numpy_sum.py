@@ -1,6 +1,7 @@
-import numpy as np
 import hashlib
 import timeit
+
+import numpy as np
 
 setup = """\
 data_array = np.random.rand(1000)

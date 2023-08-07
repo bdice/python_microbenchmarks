@@ -17,6 +17,10 @@ m.hexdigest()
 
 for test_name, test_stmt in tests.items():
     times = timeit.repeat(
-        setup=setup, stmt=test_stmt, repeat=100, number=100, globals={"os": os, "hashlib": hashlib}
+        setup=setup,
+        stmt=test_stmt,
+        repeat=100,
+        number=100,
+        globals={"os": os, "hashlib": hashlib},
     )
     print(test_name + ":", sum(times) / len(times))

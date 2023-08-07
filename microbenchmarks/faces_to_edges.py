@@ -1,6 +1,7 @@
 import os
 import timeit
 from textwrap import dedent
+
 import numpy as np
 
 """Compute edges from faces (arrays of vertex indices)."""
