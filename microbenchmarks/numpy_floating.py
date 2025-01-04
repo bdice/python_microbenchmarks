@@ -10,9 +10,15 @@ data_list = data_array.tolist()
 tests = {
     "float": """[isinstance(x, float) for x in data_list]""",
     "np.floating": """[isinstance(x, np.floating) for x in data_list]""",
-    "float, np.floating": """[isinstance(x, (float, np.floating)) for x in data_list]""",
-    "np.floating, float": """[isinstance(x, (np.floating, float)) for x in data_list]""",
-    "float or np.floating": """[(isinstance(x, float) or isinstance(x, np.floating)) for x in data_list]""",
+    "float, np.floating": (
+        """[isinstance(x, (float, np.floating)) for x in data_list]"""
+    ),
+    "np.floating, float": (
+        """[isinstance(x, (np.floating, float)) for x in data_list]"""
+    ),
+    "float or np.floating": (
+        """[(isinstance(x, float) or isinstance(x, np.floating)) for x in data_list]"""
+    ),
 }
 
 results = {}

@@ -16,18 +16,8 @@ repos:
       - id: pyupgrade
         args:
           - --py39-plus
-  - repo: https://github.com/PyCQA/isort
-    rev: '5.13.2'
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.6
     hooks:
-      - id: isort
-  - repo: https://github.com/psf/black
-    rev: '24.10.0'
-    hooks:
-      - id: black
-  - repo: https://github.com/PyCQA/flake8
-    rev: '7.1.1'
-    hooks:
-      - id: flake8
-        args:
-        - --show-source
-        - --config=setup.cfg
+    - id: ruff
+    - id: ruff-format
