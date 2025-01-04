@@ -1,3 +1,4 @@
+import time
 import timeit
 
 setups = {
@@ -5,12 +6,14 @@ setups = {
 class MyClass:
     @property
     def __protocol__(self):
+        time.sleep(0.00001)
         return True
 
 obj = MyClass()""",
     "method": """
 class MyClass:
     def __protocol__(self):
+        time.sleep(0.00001)
         return True
 
 obj = MyClass()""",
@@ -29,6 +32,9 @@ except AttributeError:
     pass
     """,
     "lbyl": """hasattr(obj, "__protocol__")""",
+    "gentle-lbyl": (
+        """"__protocol__" in obj.__dir__() or hasattr(obj, "__protocol__")"""
+    ),
 }
 
 results = {}
@@ -39,8 +45,8 @@ for setup_name, setup_stmt in setups.items():
             setup=setup_stmt,
             stmt=test_stmt,
             repeat=10,
-            number=100000,
-            globals={},
+            number=1000,
+            globals={"time": time},
         )
         avg_time = sum(times) / len(times)
         results[test_name] = avg_time
